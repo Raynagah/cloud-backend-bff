@@ -1,0 +1,30 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: bff
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://login.microsoftonline.com/${AZURE_TENANT_ID}/v2.0
+
+# CONFIGURACIÓN DE RUTAS INTERNAS PARA OPENFEIGN
+# Usamos variables de entorno para apuntar a la red de Docker en producción
+# o localhost para desarrollo local.
+microservicios:
+  producto:
+    url: ${MS_PRODUCTO_URL:http://localhost:8082}
+  carrito:
+    url: ${MS_CARRITO_URL:http://localhost:8083}
+
+# CONFIGURACIÓN DE SPRINGDOC (SWAGGER) PARA EL BFF
+springdoc:
+  show-actuator: true
+  swagger-ui:
+    use-root-path: true
+    path: /swagger-ui.html
+  api-docs:
+    path: /api/bff/v1/api-docs
