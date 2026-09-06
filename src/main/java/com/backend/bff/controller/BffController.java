@@ -18,16 +18,26 @@ public class BffController {
         this.orquestadorService = orquestadorService;
     }
 
-    @GetMapping("/{usuarioId}")
-    public ResponseEntity<CarritoEnriquecidoDTO> obtenerCarritoCompleto(@PathVariable String usuarioId) {
-        return ResponseEntity.ok(orquestadorService.obtenerCarritoCompleto(usuarioId));
+    @GetMapping
+    public ResponseEntity<CarritoEnriquecidoDTO> obtenerCarritoCompleto() {
+        return ResponseEntity.ok(orquestadorService.obtenerCarritoCompleto());
     }
 
-    @PostMapping("/{usuarioId}/items")
-    public ResponseEntity<CarritoEnriquecidoDTO> agregarItem(
-            @PathVariable String usuarioId,
-            @Valid @RequestBody ItemCarritoRequestDTO requestDTO) {
-        CarritoEnriquecidoDTO respuesta = orquestadorService.agregarItemYEnriquecer(usuarioId, requestDTO);
+    @PostMapping("/items")
+    public ResponseEntity<CarritoEnriquecidoDTO> agregarItem(@Valid @RequestBody ItemCarritoRequestDTO requestDTO) {
+        CarritoEnriquecidoDTO respuesta = orquestadorService.agregarItemYEnriquecer(requestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(respuesta);
+    }
+
+    @DeleteMapping("/items/{productoId}")
+    public ResponseEntity<CarritoEnriquecidoDTO> eliminarItem(@PathVariable Long productoId) {
+        CarritoEnriquecidoDTO respuesta = orquestadorService.eliminarItemYEnriquecer(productoId);
+        return ResponseEntity.ok(respuesta);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> vaciarCarrito() {
+        orquestadorService.vaciarCarrito();
+        return ResponseEntity.noContent().build();
     }
 }

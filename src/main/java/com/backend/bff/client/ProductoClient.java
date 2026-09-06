@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-// El atributo 'url' lee la variable que definimos en el application.yml
 @FeignClient(name = "producto-client", url = "${microservicios.producto.url}/api/v1/productos")
 public interface ProductoClient {
 

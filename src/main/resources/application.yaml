@@ -16,11 +16,12 @@ spring:
 # o localhost para desarrollo local.
 microservicios:
   producto:
-    url: ${MS_PRODUCTO_URL:http://localhost:8082}
+    url: ${MS_PRODUCTO_URL:https://peq4cfx9b1.execute-api.us-east-1.amazonaws.com/desarrolloprocarr}
   carrito:
-    url: ${MS_CARRITO_URL:http://localhost:8083}
+    url: ${MS_CARRITO_URL:https://bhpifynk8i.execute-api.us-east-1.amazonaws.com/desarrollocarrito}
+  usuario:
+    url: ${MS_USUARIO_URL:https://nku8zd8ok9.execute-api.us-east-1.amazonaws.com/desarrollo1}
 
-# CONFIGURACIÓN DE SPRINGDOC (SWAGGER) PARA EL BFF
 springdoc:
   show-actuator: true
   swagger-ui:

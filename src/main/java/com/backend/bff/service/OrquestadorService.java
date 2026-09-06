@@ -1,9 +1,10 @@
 package com.backend.bff.service;
 
-import com.backend.bff.dto.CarritoEnriquecidoDTO;
-import com.backend.bff.dto.ItemCarritoRequestDTO;
+import com.backend.bff.dto.*;
 
 public interface OrquestadorService {
-    CarritoEnriquecidoDTO obtenerCarritoCompleto(String usuarioId);
-    CarritoEnriquecidoDTO agregarItemYEnriquecer(String usuarioId, ItemCarritoRequestDTO requestDTO);
+    CarritoEnriquecidoDTO obtenerCarritoCompleto();
+    CarritoEnriquecidoDTO agregarItemYEnriquecer(ItemCarritoRequestDTO requestDTO);
+    CarritoEnriquecidoDTO eliminarItemYEnriquecer(Long productoId);
+    void vaciarCarrito();
 }

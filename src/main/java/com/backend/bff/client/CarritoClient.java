@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(name = "carrito-client", url = "${microservicios.carrito.url}/api/v1/carritos")
 public interface CarritoClient {
 
-    @GetMapping("/{usuarioId}")
-    CarritoDTO obtenerCarritoActivo(@PathVariable("usuarioId") String usuarioId);
+    @GetMapping
+    CarritoDTO obtenerCarritoActivo();
 
-    @PostMapping("/{usuarioId}/items")
-    CarritoDTO agregarItem(
-            @PathVariable("usuarioId") String usuarioId, 
-            @RequestBody ItemCarritoRequestDTO dto
-    );
+    @PostMapping("/items")
+    CarritoDTO agregarItem(@RequestBody ItemCarritoRequestDTO dto);
 
-    @DeleteMapping("/{usuarioId}")
-    void vaciarCarrito(@PathVariable("usuarioId") String usuarioId);
+    @DeleteMapping("/items/{productoId}")
+    CarritoDTO eliminarItem(@PathVariable("productoId") Long productoId);
+
+    @DeleteMapping
+    void vaciarCarrito();
 }
