@@ -5,11 +5,12 @@ spring:
   application:
     name: bff
 
-  security:
+  security: 
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://login.microsoftonline.com/${AZURE_TENANT_ID}/v2.0
+          issuer-uri: https://login.microsoftonline.com/
+          tenant-id: 78b145ef-56b9-4397-b87c-27b242a9fce5
 
 # CONFIGURACIÓN DE RUTAS INTERNAS PARA OPENFEIGN
 # Usamos variables de entorno para apuntar a la red de Docker en producción
