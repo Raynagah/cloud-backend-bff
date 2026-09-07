@@ -20,9 +20,16 @@ public class BffUsuarioController {
         this.usuarioService = usuarioService;
     }
 
+    // DESPUÉS (BffUsuarioController.java)
     @PostMapping("/login")
-    public ResponseEntity<UsuarioDTO> login(@Valid @RequestBody SsoLoginRequestDTO dto) {
-        return ResponseEntity.ok(usuarioService.loginSSO(dto));
+    public ResponseEntity<?> login(@Valid @RequestBody SsoLoginRequestDTO dto) { // Nota el <?> para permitir devolver DTO o String de error
+        try {
+            return ResponseEntity.ok(usuarioService.loginSSO(dto));
+        } catch (feign.FeignException e) {
+            // Captura el error del microservicio (ej. 401) y se lo pasa limpio al Frontend
+            // e.status() tendrá el 401, y e.contentUTF8() tendrá el mensaje de tu MS
+            return ResponseEntity.status(e.status()).body(e.contentUTF8());
+        }
     }
 
     @PostMapping
