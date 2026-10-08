@@ -5,15 +5,17 @@ import org.springframework.web.bind.annotation.*;
 import com.backend.bff.dto.NotificacionDTO;
 import java.util.List;
 
-@FeignClient(name = "ms-notificaciones", url = "${app.feign.ms-notificaciones.url:http://ms-notificaciones:8086}")
+// 1. Corregida la variable para que lea la del application.yml
+@FeignClient(name = "notificacion-client", url = "${microservicios.notificaciones.url}/api/v1/notificaciones")
 public interface NotificacionClient {
 
-    @GetMapping("/api/notificaciones/usuario/{correo}")
+    // 2. Añadido el /v1 a las rutas
+    @GetMapping("/usuario/{correo}")
     List<NotificacionDTO> obtenerPorUsuario(@PathVariable("correo") String correo);
 
-    @DeleteMapping("/api/notificaciones/{id}")
+    @DeleteMapping("/{id}")
     void eliminarNotificacion(@PathVariable("id") Long id);
 
-    @PutMapping("/api/notificaciones/{id}/leer")
+    @PutMapping("/{id}/leer")
     NotificacionDTO marcarComoLeida(@PathVariable("id") Long id);
 }
