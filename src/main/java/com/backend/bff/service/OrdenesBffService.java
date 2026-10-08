@@ -1,7 +1,9 @@
 package com.backend.bff.service;
 
+import com.backend.bff.dto.OrdenRequestDTO;
+
 public interface OrdenesBffService {
-    Object realizarCheckout(String token, Object requestBody);
-    Object obtenerMisOrdenes(String token);
-    Object obtenerOrdenPorId(String token, Long id);
+    Object realizarCheckout(OrdenRequestDTO requestDTO);
+    Object obtenerMisOrdenes();
+    Object obtenerOrdenPorId(Long id);
 }
