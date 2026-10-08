@@ -9,7 +9,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://login.microsoftonline.com/78b145ef-56b9-4397-b87c-27b242a9fce5/v2.0
+          issuer-uri: https://login.microsoftonline.com/
+          tenant-id: 78b145ef-56b9-4397-b87c-27b242a9fce5
 
 # CONFIGURACIÓN DE ENDPOINTS PARA OPENFEIGN
 # 1. Si existe MS_*_URL, usa esa URL específica.
