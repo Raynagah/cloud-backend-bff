@@ -27,6 +27,8 @@ microservicios:
     url: ${MS_ORDENES_URL:${AWS_BACKEND_GATEWAY_URL:http://localhost:8085}}
   notificaciones:
     url: ${MS_NOTIFICACIONES_URL:${AWS_BACKEND_GATEWAY_URL:http://localhost:8086}}
+  despachos:
+    url: ${MS_DESPACHOS_URL:${AWS_BACKEND_GATEWAY_URL:http://localhost:8087}}
 
 springdoc:
   show-actuator: true

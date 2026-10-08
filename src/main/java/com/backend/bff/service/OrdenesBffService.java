@@ -6,4 +6,5 @@ public interface OrdenesBffService {
     Object realizarCheckout(OrdenRequestDTO requestDTO);
     Object obtenerMisOrdenes();
     Object obtenerOrdenPorId(Long id);
+    Object obtenerDetalleCompleto(Long id);
 }

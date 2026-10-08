@@ -29,4 +29,9 @@ public class BffOrdenesController {
     public ResponseEntity<Object> getOrdenPorId(@PathVariable("id") Long id) {
         return ResponseEntity.ok(ordenesBffService.obtenerOrdenPorId(id));
     }
+
+    @GetMapping("/{id}/detalle-completo")
+    public ResponseEntity<Object> getDetalleCompleto(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(ordenesBffService.obtenerDetalleCompleto(id));
+    }    
 }
