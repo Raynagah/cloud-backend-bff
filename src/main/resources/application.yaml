@@ -11,22 +11,22 @@ spring:
         jwt:
           issuer-uri: https://login.microsoftonline.com/
           tenant-id: 78b145ef-56b9-4397-b87c-27b242a9fce5
-          
+
 # CONFIGURACIÓN DE ENDPOINTS PARA OPENFEIGN
 # 1. Si existe MS_*_URL, usa esa URL específica.
 # 2. Si existe AWS_BACKEND_GATEWAY_URL, la usa como base central.
 # 3. Si no hay variables (desarrollo local), apunta a localhost en el puerto de cada microservicio.
 microservicios:
   usuario:
-    url: ${MS_USUARIO_URL:${AWS_BACKEND_GATEWAY_URL:http://localhost:8081}/api/usuarios}
+    url: ${MS_USUARIO_URL:${AWS_BACKEND_GATEWAY_URL:http://localhost:8081}}
   producto:
-    url: ${MS_PRODUCTO_URL:${AWS_BACKEND_GATEWAY_URL:http://localhost:8082}/api/v1/productos}
+    url: ${MS_PRODUCTO_URL:${AWS_BACKEND_GATEWAY_URL:http://localhost:8082}}
   carrito:
-    url: ${MS_CARRITO_URL:${AWS_BACKEND_GATEWAY_URL:http://localhost:8083}/api/carritos}
+    url: ${MS_CARRITO_URL:${AWS_BACKEND_GATEWAY_URL:http://localhost:8083}}
   ordenes:
-    url: ${MS_ORDENES_URL:${AWS_BACKEND_GATEWAY_URL:http://localhost:8085}/api/ordenes}
+    url: ${MS_ORDENES_URL:${AWS_BACKEND_GATEWAY_URL:http://localhost:8085}}
   notificaciones:
-    url: ${MS_NOTIFICACIONES_URL:${AWS_BACKEND_GATEWAY_URL:http://localhost:8086}/api/notificaciones}
+    url: ${MS_NOTIFICACIONES_URL:${AWS_BACKEND_GATEWAY_URL:http://localhost:8086}}
 
 springdoc:
   show-actuator: true
