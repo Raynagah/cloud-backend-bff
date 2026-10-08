@@ -11,7 +11,7 @@ spring:
         jwt:
           issuer-uri: https://login.microsoftonline.com/
           tenant-id: 78b145ef-56b9-4397-b87c-27b242a9fce5
-
+          
 # CONFIGURACIÓN DE ENDPOINTS PARA OPENFEIGN
 # 1. Si existe MS_*_URL, usa esa URL específica.
 # 2. Si existe AWS_BACKEND_GATEWAY_URL, la usa como base central.
