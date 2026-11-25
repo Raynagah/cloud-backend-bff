@@ -6,12 +6,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
-@FeignClient(name = "analytics-client", url = "${microservicios.analytics.url}/api/v1/analytics")
+@FeignClient(
+    name = "analytics-client",
+    url = "${microservicios.analytics.url}/api/v1/analytics"
+)
 public interface AnalyticsClient {
 
     @GetMapping("/recomendaciones")
     List<RecomendacionDTO> recomendaciones(
-            @RequestParam(value = "productoId", required = false) Long productoId,
-            @RequestParam(value = "max", required = false) Integer max);
+            @RequestParam(value = "productoId", required = false)
+            Long productoId,
+
+            @RequestParam(value = "max", required = false)
+            Integer max
+    );
+
+    @GetMapping("/metricas")
+    Map<String, Object> metricas();
+
+    @GetMapping("/eventos/recientes")
+    List<Map<String, Object>> eventosRecientes(
+            @RequestParam("limite") int limite
+    );
 }
