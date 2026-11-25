@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.backend.bff.client.UsuarioClient;
+import com.backend.bff.dto.UsuarioDTO;
+import java.util.Map;
 
 /**
  * Único punto de entrada del frontend para los pagos: valida el JWT (SecurityConfig) y delega en ms-pagos.
@@ -22,9 +25,14 @@ public class BffPagosController {
     private static final Logger LOG = LoggerFactory.getLogger(BffPagosController.class);
 
     private final PagosClient pagosClient;
+    private final UsuarioClient usuarioClient;
 
-    public BffPagosController(PagosClient pagosClient) {
+    public BffPagosController(
+            PagosClient pagosClient,
+            UsuarioClient usuarioClient) {
+
         this.pagosClient = pagosClient;
+        this.usuarioClient = usuarioClient;
     }
 
     @PostMapping("/iniciar")
@@ -48,7 +56,20 @@ public class BffPagosController {
     @GetMapping("/alertas")
     public ResponseEntity<?> alertas() {
         try {
+            UsuarioDTO usuario = usuarioClient.obtenerMiPerfil();
+
+            if (usuario == null ||
+                    !"admin".equalsIgnoreCase(usuario.tipoUsuario())) {
+
+                return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                        .body(Map.of(
+                            "error", "Prohibido",
+                            "mensaje", "Se requiere rol admin para ver las alertas."
+                        ));
+            }
+
             return ResponseEntity.ok(pagosClient.alertas());
+
         } catch (FeignException e) {
             return propagar(e);
         }
